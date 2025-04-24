@@ -15,6 +15,19 @@ class TestAnalizador(unittest.TestCase):
         total_provincias = len(resumen)
         self.assertEqual(total_provincias, 24)
 
-    def test_ventas_totales_mayores_0(self):
+    def test_ventas_totales_mayores_5k(self):
         resumen = self.analizador.ventas_totales_por_provincia()
         self.assertTrue(all(float(v) > 5000 for v in resumen.values()))
+
+    def test_ventas_por_provincias_inexistente(self):
+        with self.assertRaises(KeyError):
+            self.analizador.ventas_por_provincia("Calderon")
+
+    def test_ventas_por_provincia_mayusculas_minusculas(self):
+        """Prueba que la búsqueda no sea sensible a mayúsculas o minúsculas"""
+        # Asegurarse de que "quito" y "QUITO" devuelvan el mismo resultado
+        resultado_mayusculas = self.analizador.ventas_por_provincia("PICHINCHA")
+        resultado_minusculas = self.analizador.ventas_por_provincia("pichincha")
+        self.assertEqual(resultado_mayusculas, resultado_minusculas)
+
+    #def test_ventas_por_provincia_3(self):

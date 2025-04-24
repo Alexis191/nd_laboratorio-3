@@ -36,4 +36,8 @@ class Analizador:
     def ventas_por_provincia(self, nombre):
         """Retorna el total de ventas de una provincia determinada"""
         ventas_por_provincia = self.ventas_totales_por_provincia()
-        return ventas_por_provincia.get(nombre, 0.0)
+        nombre_normalizado = nombre.strip().upper()  # Convertir nombre a mayusculas
+
+        if nombre_normalizado not in ventas_por_provincia:
+            raise KeyError(f"La provincia '{nombre}' no se encuentra en los datos.")
+        return ventas_por_provincia[nombre_normalizado]
