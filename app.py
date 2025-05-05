@@ -36,5 +36,11 @@ def main():
     for provincia, porcentaje in porcentaje_tarifa_cero.items():
         print(f"\t{provincia}: {porcentaje:.2f}%")
 
+    print("\nDiferencia entre ventas totales y exportaciones por provincia:")
+    diferencias = analizador.diferencia_ventas_exportaciones()
+    for provincia, diferencia in diferencias.items():
+        print(f"\t{provincia}: ${diferencia:,.2f}")
+
+
 if __name__ == "__main__":
     main()
