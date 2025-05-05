@@ -53,4 +53,12 @@ class TestAnalizador(unittest.TestCase):
             self.assertLessEqual(porcentaje, 100)
 
         
-    #def test_ventas_por_provincia_3(self):
+    def test_diferencia_ventas_exportaciones_formato(self):
+        """Verifica que la función retorne un diccionario con diferencias válidas"""
+        diferencias = self.analizador.diferencia_ventas_exportaciones()
+        self.assertIsInstance(diferencias, dict)
+
+        for provincia, valor in diferencias.items():
+            self.assertIsInstance(provincia, str)
+            self.assertIsInstance(valor, float)
+
